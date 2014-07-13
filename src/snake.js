@@ -16,18 +16,21 @@
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
+  function extend(consumer, provider) {
+    allongeLib.es.mixin(provider).call(consumer);
+    return consumer;
+  }
+
   reduceToArray = m.comp(m.into_array, m.reduce);
   mapToArray = m.comp(m.into_array, m.map);
 
-  snake.constants = {};
-  allongeLib.es.mixin({
+  snake.constants = extend({}, {
     width: 75,
     height: 50,
     pointSize: 10
-  }).call(snake.constants);
+  });
 
-  snake.FunctionalModel = {};
-  allongeLib.es.mixin({
+  snake.FunctionalModel = extend({}, {
       addPoints: allongeLib.es.variadic(function (points) {
         return reduceToArray(
           m.partial(m.map, m.sum),
@@ -51,7 +54,7 @@
         };
       }
     }
-  ).call(snake.FunctionalModel);
+  );
 
   if (typeof exports !== 'undefined') {
     if (typeof module !== 'undefined' && module.exports) {
