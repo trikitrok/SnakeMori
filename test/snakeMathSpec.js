@@ -54,23 +54,26 @@ describe("Snake's functional model", function () {
   });
 
   it("tells when the game is lost", function () {
-    expect(fns.loses({body: [
-      [1, 1],
-      [1, 2],
-      [1, 3]
-    ]})).toBeFalsy();
-    expect(fns.loses({body: [
-      [1, 1],
-      [1, 2],
-      [1, 1]
-    ]})).toBeTruthy();
+    var snakeNotOverlapping = {body: [
+        [1, 1],
+        [1, 2],
+        [1, 3]
+      ]},
+      snakeOverlapping = {body: [
+        [1, 1],
+        [1, 2],
+        [1, 1]
+      ]};
+
+    expect(fns.loses(snakeNotOverlapping)).toBeFalsy();
+    expect(fns.loses(snakeOverlapping)).toBeTruthy();
   });
 
   it("tells when the snake eats an apple", function () {
     var snake = {body: [
-      [1, 1],
-      [1, 2]
-    ]},
+        [1, 1],
+        [1, 2]
+      ]},
       eatableApple = {location: [1, 1]},
       nonEatableApple = {location: [1, 2]};
 
@@ -82,8 +85,3 @@ describe("Snake's functional model", function () {
     return value >= lowerLimit && value < upperLimit;
   }
 });
-
-
-
-
-
