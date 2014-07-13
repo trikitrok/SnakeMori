@@ -34,6 +34,13 @@ describe("Snake's functional model", function () {
     expect(snake.body.length).toBe(1);
   });
 
+  it("also can make the snake grow when it moves it", function() {
+    var snake = fns.move(fns.createSnake(), true);
+
+    expect(snake.body).toEqual([[2, 1], [1, 1]]);
+    expect(snake.body.length).toBe(2);
+  });
+
   function insideClosedOpenInterval(value, lowerLimit, upperLimit) {
     return value >= lowerLimit && value < upperLimit;
   }
