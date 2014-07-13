@@ -19,17 +19,15 @@
   reduceToArray = m.comp(m.into_array, m.reduce);
   mapToArray = m.comp(m.into_array, m.map);
 
-  snake.constants = allongeLib.es.extend(
-    {}, {
-      width: 75,
-      height: 50,
-      pointSize: 10
-    }
-  );
+  snake.constants = {};
+  allongeLib.es.mixin({
+    width: 75,
+    height: 50,
+    pointSize: 10
+  }).call(snake.constants);
 
-  snake.FunctionalModel = allongeLib.es.extend(
-    {},
-    {
+  snake.FunctionalModel = {};
+  allongeLib.es.mixin({
       addPoints: allongeLib.es.variadic(function (points) {
         return reduceToArray(
           m.partial(m.map, m.sum),
@@ -53,7 +51,7 @@
         };
       }
     }
-  );
+  ).call(snake.FunctionalModel);
 
   if (typeof exports !== 'undefined') {
     if (typeof module !== 'undefined' && module.exports) {
