@@ -85,7 +85,9 @@
 
       win: function (snake) {
         return snake.body.length >= SnakeGame.Constants.winLength;
-      }
+      },
+
+      lose: headOverlapsBody
     }
   );
 
@@ -105,6 +107,22 @@
   function extend(consumer, provider) {
     allongeLib.es.mixin(provider).call(consumer);
     return consumer;
+  }
+
+  function headOverlapsBody(snake) {
+    var head = m.first(snake.body),
+      restOfBody = m.rest(snake.body);
+
+    return !m.every(
+      function (elem) {
+        return !samePoint(elem, head);
+      },
+      restOfBody
+    );
+
+    function samePoint(pt1, pt2) {
+      return pt1[0] === pt2[0] && pt1[1] === pt2[1];
+    }
   }
 
 }).call();

@@ -50,6 +50,11 @@ describe("Snake's functional model", function () {
     expect(fns.win({body: new Array(SnakeGame.Constants.winLength - 1)})).toBeFalsy();
   });
 
+  it("tells when the game is lost", function() {
+    expect(fns.lose({body: [[1,1], [1,2], [1,3]]})).toBeFalsy();
+    expect(fns.lose({body: [[1,1], [1,2], [1,1]]})).toBeTruthy();
+  });
+
   function insideClosedOpenInterval(value, lowerLimit, upperLimit) {
     return value >= lowerLimit && value < upperLimit;
   }
