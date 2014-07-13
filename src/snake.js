@@ -76,11 +76,9 @@
               m.take(snake.body.length - 1, snake.body)
           );
 
-        return {
-          body: m.into_array(body),
-          direction: snake.direction,
-          color: snake.color
-        };
+        return m.clj_to_js(
+          m.assoc(m.js_to_clj (snake), "body", m.into_array(body))
+        );
       },
 
       wins: function (snake) {
@@ -94,11 +92,9 @@
       },
 
       turn: function(snake, newDirection) {
-        return {
-          body: snake.body,
-          direction: newDirection,
-          color: snake.color
-        }
+        return m.clj_to_js(
+          m.assoc(m.js_to_clj (snake), "direction", newDirection)
+        );
       }
     }
   );
