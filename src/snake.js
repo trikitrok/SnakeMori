@@ -3,8 +3,7 @@
 (function () {
   var root = this,
     m, allongeLib,
-    SnakeGame = {},
-    addPoints;
+    SnakeGame = {};
 
   if (typeof require !== 'undefined') {
     m = require('mori');
@@ -13,13 +12,6 @@
     m = mori;
     allongeLib = allong;
   }
-
-  addPoints = function (points) {
-    return m.reduce(
-      m.partial(m.map, m.sum),
-      points
-    );
-  };
 
   SnakeGame.Constants = extend({}, {
     width: 75,
@@ -138,4 +130,12 @@
   function sameLocation(pt1, pt2) {
     return pt1[0] === pt2[0] && pt1[1] === pt2[1];
   }
+
+  function addPoints (points) {
+    return m.reduce(
+      m.partial(m.map, m.sum),
+      points
+    );
+  };
+
 }).call();
