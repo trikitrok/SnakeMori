@@ -52,14 +52,13 @@
     }
   );
 
-if (typeof exports !== 'undefined') {
-  if (typeof module !== 'undefined' && module.exports) {
-    exports = module.exports = snake;
+  if (typeof exports !== 'undefined') {
+    if (typeof module !== 'undefined' && module.exports) {
+      exports = module.exports = snake;
+    }
+    exports.snake = allong;
+  } else {
+    root.snake = snake;
   }
-  exports.snake = allong;
-} else {
-  root.snake = snake;
-}
 
-}).
-call();
+}).call();
