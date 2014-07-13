@@ -1,3 +1,5 @@
+'use strict';
+
 var SnakeGame = require("../src/snake.js");
 
 describe("Snake's functional model", function () {

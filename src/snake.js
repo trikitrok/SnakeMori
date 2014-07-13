@@ -1,3 +1,5 @@
+'use strinct';
+
 (function () {
   var root = this,
     m, allongeLib,
