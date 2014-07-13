@@ -89,7 +89,17 @@
 
       loses: headOverlapsBody,
 
-      eats: headOccupiesAppleLocation
+      eats: function(snake, apple) {
+        return sameLocation(getHead(snake), apple.location);
+      },
+
+      turn: function(snake, newDirection) {
+        return {
+          body: snake.body,
+          direction: newDirection,
+          color: snake.color
+        }
+      }
     }
   );
 
@@ -130,9 +140,4 @@
   function sameLocation(pt1, pt2) {
     return pt1[0] === pt2[0] && pt1[1] === pt2[1];
   }
-
-  function headOccupiesAppleLocation(snake, apple) {
-    return sameLocation(getHead(snake), apple.location);
-  }
-
 }).call();

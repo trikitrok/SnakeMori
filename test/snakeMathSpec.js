@@ -81,6 +81,12 @@ describe("Snake's functional model", function () {
     expect(fns.eats(snake, nonEatableApple)).toBeFalsy();
   });
 
+  it("turns a snake", function() {
+    var snakeFacingEast = {direction: [1, 0]};
+
+    expect(fns.turn(snakeFacingEast, [0, 1]).direction).toEqual([0, 1]);
+  });
+
   function insideClosedOpenInterval(value, lowerLimit, upperLimit) {
     return value >= lowerLimit && value < upperLimit;
   }
