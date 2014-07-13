@@ -1,12 +1,15 @@
 (function () {
   var root = this,
-    m, allong, snake = {},
+    m, allongeLib, snake = {},
     reduceToArray,
     mapToArray;
 
   if (typeof require !== 'undefined') {
     m = require('mori');
-    allong = require('allong.es');
+    allongeLib = require('allong.es');
+  } else {
+    m = mori;
+    allongeLib = allong;
   }
 
   function getRandomInt(min, max) {
@@ -16,7 +19,7 @@
   reduceToArray = m.comp(m.into_array, m.reduce);
   mapToArray = m.comp(m.into_array, m.map);
 
-  snake.constants = allong.es.extend(
+  snake.constants = allongeLib.es.extend(
     {}, {
       width: 75,
       height: 50,
@@ -24,10 +27,10 @@
     }
   );
 
-  snake.FunctionalModel = allong.es.extend(
+  snake.FunctionalModel = allongeLib.es.extend(
     {},
     {
-      addPoints: allong.es.variadic(function (points) {
+      addPoints: allongeLib.es.variadic(function (points) {
         return reduceToArray(
           m.partial(m.map, m.sum),
           points
@@ -56,7 +59,7 @@
     if (typeof module !== 'undefined' && module.exports) {
       exports = module.exports = snake;
     }
-    exports.snake = allong;
+    exports.snake = allongeLib;
   } else {
     root.snake = snake;
   }
