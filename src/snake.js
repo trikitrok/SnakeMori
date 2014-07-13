@@ -22,7 +22,8 @@
   SnakeGame.Constants = extend({}, {
     width: 75,
     height: 50,
-    pointSize: 10
+    pointSize: 10,
+    winLength: 5
   });
 
   SnakeGame.FunctionalModel = extend({}, {
@@ -80,6 +81,10 @@
           direction: snake.direction,
           color: snake.color
         };
+      },
+
+      win: function (snake) {
+        return snake.body.length >= SnakeGame.Constants.winLength;
       }
     }
   );

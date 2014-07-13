@@ -22,23 +22,32 @@ describe("Snake's functional model", function () {
   it("creates a snake", function () {
     var snake = fns.createSnake();
 
-    expect(snake.body).toEqual([[1, 1]]);
+    expect(snake.body).toEqual([
+      [1, 1]
+    ]);
     expect(snake.direction).toEqual([1, 0]);
     expect(snake.color).toEqual([15, 160, 70]);
   });
 
-  it("moves the snake in its direction", function() {
+  it("moves the snake in its direction", function () {
     var snake = fns.move(fns.createSnake());
 
-    expect(snake.body).toEqual([[2, 1]]);
+    expect(snake.body).toEqual([
+      [2, 1]
+    ]);
     expect(snake.body.length).toBe(1);
   });
 
-  it("also can make the snake grow when it moves it", function() {
+  it("also can make the snake grow when it moves it", function () {
     var snake = fns.move(fns.createSnake(), true);
 
-    expect(snake.body).toEqual([[2, 1], [1, 1]]);
+    expect(snake.body).toEqual([[2, 1],[1, 1]]);
     expect(snake.body.length).toBe(2);
+  })
+
+  it("tells when the game is won", function () {
+    expect(fns.win({body: new Array(SnakeGame.Constants.winLength)})).toBeTruthy();
+    expect(fns.win({body: new Array(SnakeGame.Constants.winLength - 1)})).toBeFalsy();
   });
 
   function insideClosedOpenInterval(value, lowerLimit, upperLimit) {
