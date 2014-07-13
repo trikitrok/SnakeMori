@@ -83,11 +83,13 @@
         };
       },
 
-      win: function (snake) {
+      wins: function (snake) {
         return snake.body.length >= SnakeGame.Constants.winLength;
       },
 
-      lose: headOverlapsBody
+      loses: headOverlapsBody,
+
+      eats: headOccupiesAppleLocation
     }
   );
 
@@ -109,20 +111,28 @@
     return consumer;
   }
 
+  function getHead(snake) {
+    return m.first(snake.body);
+  }
+
   function headOverlapsBody(snake) {
-    var head = m.first(snake.body),
+    var head = getHead(snake),
       restOfBody = m.rest(snake.body);
 
     return !m.every(
       function (elem) {
-        return !samePoint(elem, head);
+        return !sameLocation(elem, head);
       },
       restOfBody
     );
+  }
 
-    function samePoint(pt1, pt2) {
-      return pt1[0] === pt2[0] && pt1[1] === pt2[1];
-    }
+  function sameLocation(pt1, pt2) {
+    return pt1[0] === pt2[0] && pt1[1] === pt2[1];
+  }
+
+  function headOccupiesAppleLocation(snake, apple) {
+    return sameLocation(getHead(snake), apple.location);
   }
 
 }).call();

@@ -41,18 +41,41 @@ describe("Snake's functional model", function () {
   it("also can make the snake grow when it moves it", function () {
     var snake = fns.move(fns.createSnake(), true);
 
-    expect(snake.body).toEqual([[2, 1],[1, 1]]);
+    expect(snake.body).toEqual([
+      [2, 1],
+      [1, 1]
+    ]);
     expect(snake.body.length).toBe(2);
   })
 
   it("tells when the game is won", function () {
-    expect(fns.win({body: new Array(SnakeGame.Constants.winLength)})).toBeTruthy();
-    expect(fns.win({body: new Array(SnakeGame.Constants.winLength - 1)})).toBeFalsy();
+    expect(fns.wins({body: new Array(SnakeGame.Constants.winLength)})).toBeTruthy();
+    expect(fns.wins({body: new Array(SnakeGame.Constants.winLength - 1)})).toBeFalsy();
   });
 
-  it("tells when the game is lost", function() {
-    expect(fns.lose({body: [[1,1], [1,2], [1,3]]})).toBeFalsy();
-    expect(fns.lose({body: [[1,1], [1,2], [1,1]]})).toBeTruthy();
+  it("tells when the game is lost", function () {
+    expect(fns.loses({body: [
+      [1, 1],
+      [1, 2],
+      [1, 3]
+    ]})).toBeFalsy();
+    expect(fns.loses({body: [
+      [1, 1],
+      [1, 2],
+      [1, 1]
+    ]})).toBeTruthy();
+  });
+
+  it("tells when the snake eats an apple", function () {
+    var snake = {body: [
+      [1, 1],
+      [1, 2]
+    ]},
+      eatableApple = {location: [1, 1]},
+      nonEatableApple = {location: [1, 2]};
+
+    expect(fns.eats(snake, eatableApple)).toBeTruthy();
+    expect(fns.eats(snake, nonEatableApple)).toBeFalsy();
   });
 
   function insideClosedOpenInterval(value, lowerLimit, upperLimit) {
