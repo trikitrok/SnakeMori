@@ -24,7 +24,7 @@
   reduceToArray = m.comp(m.into_array, m.reduce);
   mapToArray = m.comp(m.into_array, m.map);
 
-  snake.constants = extend({}, {
+  snake.Constants = extend({}, {
     width: 75,
     height: 50,
     pointSize: 10
@@ -41,7 +41,7 @@
       pointToScreenRectangle: function (point) {
         return mapToArray(
           function (num) {
-            return num * snake.constants.pointSize;
+            return num * snake.Constants.pointSize;
           },
           [point[0], point[1], 1, 1]
         );
@@ -49,7 +49,7 @@
 
       createApple: function () {
         return {
-          location: [getRandomInt(0, snake.constants.width), getRandomInt(0, snake.constants.height)],
+          location: [getRandomInt(0, snake.Constants.width), getRandomInt(0, snake.Constants.height)],
           color: [210, 50, 90]
         };
       }

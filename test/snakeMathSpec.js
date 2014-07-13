@@ -14,8 +14,8 @@ describe("Snake's functional model", function () {
   it("creates an apple", function () {
     var apple = fns.createApple();
 
-    expect(insideClosedOpenInterval(apple.location[0], 0, snake.constants.width)).toBeTruthy();
-    expect(insideClosedOpenInterval(apple.location[1], 0, snake.constants.height)).toBeTruthy();
+    expect(insideClosedOpenInterval(apple.location[0], 0, snake.Constants.width)).toBeTruthy();
+    expect(insideClosedOpenInterval(apple.location[1], 0, snake.Constants.height)).toBeTruthy();
     expect(apple.color).toEqual([210, 50, 90]);
   });
 
