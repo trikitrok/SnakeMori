@@ -2,8 +2,7 @@
   var root = this,
     m, allongeLib,
     snake = {},
-    reduceToArray,
-    mapToArray;
+    addPoints;
 
   if (typeof require !== 'undefined') {
     m = require('mori');
@@ -13,8 +12,12 @@
     allongeLib = allong;
   }
 
-  reduceToArray = m.comp(m.into_array, m.reduce);
-  mapToArray = m.comp(m.into_array, m.map);
+  var addPoints = function (points) {
+      return m.reduce(
+        m.partial(m.map, m.sum),
+        points
+      );
+  };
 
   snake.Constants = extend({}, {
     width: 75,
@@ -25,20 +28,18 @@
   snake.FunctionalModel = extend({}, {
       addPoints: allongeLib.es.variadic(
         function (points) {
-          return reduceToArray(
-            m.partial(m.map, m.sum),
-            points
-          );
+          return m.into_array(addPoints(points));
         }
       ),
 
       pointToScreenRectangle: function (point) {
-        return mapToArray(
+        var rectangle = m.map(
           function (num) {
             return num * snake.Constants.pointSize;
           },
           [point[0], point[1], 1, 1]
         );
+        return m.into_array(rectangle);
       },
 
       createApple: function () {
@@ -53,10 +54,29 @@
 
       createSnake: function () {
         return {
-          body: [1, 1],
+          body: [[1, 1]],
           direction: [1, 0],
           color: [15, 160, 70]
         };
+      },
+
+      move: function(snake) {
+        var body = m.cons(
+          this.addPoints(
+            m.first(snake.body),
+            snake.direction
+          ),
+          m.take(
+            m.dec(m.count(snake.body)),
+            snake.body
+          )
+        );
+
+        return {
+          body: m.into_array(body),
+          direction: snake.direction,
+          color: snake.color
+        }
       }
     }
   );
