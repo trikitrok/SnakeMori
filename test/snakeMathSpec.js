@@ -1,7 +1,7 @@
-var snake = require("../src/snake.js");
+var SnakeGame = require("../src/snake.js");
 
 describe("Snake's functional model", function () {
-  var fns = snake.FunctionalModel;
+  var fns = SnakeGame.FunctionalModel;
 
   it("adds points", function () {
     expect(fns.addPoints([1, 2], [2, 3], [-1, -2])).toEqual([2, 3]);
@@ -14,13 +14,21 @@ describe("Snake's functional model", function () {
   it("creates an apple", function () {
     var apple = fns.createApple();
 
-    expect(insideClosedOpenInterval(apple.location[0], 0, snake.Constants.width)).toBeTruthy();
-    expect(insideClosedOpenInterval(apple.location[1], 0, snake.Constants.height)).toBeTruthy();
+    expect(insideClosedOpenInterval(apple.location[0], 0, SnakeGame.Constants.width)).toBeTruthy();
+    expect(insideClosedOpenInterval(apple.location[1], 0, SnakeGame.Constants.height)).toBeTruthy();
     expect(apple.color).toEqual([210, 50, 90]);
   });
 
-  function insideClosedOpenInterval(value, lowerLimmit, upperLimit) {
-    return value >= lowerLimmit && value < upperLimit;
+  it("creates a snake", function () {
+    var snake = fns.createSnake();
+
+    expect(snake.body).toEqual([1, 1]);
+    expect(snake.direction).toEqual([1, 0]);
+    expect(snake.color).toEqual([15, 160, 70]);
+  });
+
+  function insideClosedOpenInterval(value, lowerLimit, upperLimit) {
+    return value >= lowerLimit && value < upperLimit;
   }
 });
 

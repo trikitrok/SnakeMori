@@ -1,6 +1,7 @@
 (function () {
   var root = this,
-    m, allongeLib, snake = {},
+    m, allongeLib,
+    snake = {},
     reduceToArray,
     mapToArray;
 
@@ -10,15 +11,6 @@
   } else {
     m = mori;
     allongeLib = allong;
-  }
-
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-
-  function extend(consumer, provider) {
-    allongeLib.es.mixin(provider).call(consumer);
-    return consumer;
   }
 
   reduceToArray = m.comp(m.into_array, m.reduce);
@@ -31,12 +23,14 @@
   });
 
   snake.FunctionalModel = extend({}, {
-      addPoints: allongeLib.es.variadic(function (points) {
-        return reduceToArray(
-          m.partial(m.map, m.sum),
-          points
-        );
-      }),
+      addPoints: allongeLib.es.variadic(
+        function (points) {
+          return reduceToArray(
+            m.partial(m.map, m.sum),
+            points
+          );
+        }
+      ),
 
       pointToScreenRectangle: function (point) {
         return mapToArray(
@@ -49,8 +43,19 @@
 
       createApple: function () {
         return {
-          location: [getRandomInt(0, snake.Constants.width), getRandomInt(0, snake.Constants.height)],
+          location: [
+            getRandomInt(0, snake.Constants.width),
+            getRandomInt(0, snake.Constants.height)
+          ],
           color: [210, 50, 90]
+        };
+      },
+
+      createSnake: function () {
+        return {
+          body: [1, 1],
+          direction: [1, 0],
+          color: [15, 160, 70]
         };
       }
     }
@@ -63,6 +68,15 @@
     exports.snake = allongeLib;
   } else {
     root.snake = snake;
+  }
+
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  function extend(consumer, provider) {
+    allongeLib.es.mixin(provider).call(consumer);
+    return consumer;
   }
 
 }).call();
