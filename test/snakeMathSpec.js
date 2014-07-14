@@ -6,7 +6,7 @@ describe("Snake's functional model", function () {
   var fns = SnakeGame.FunctionalModel;
 
   it("adds points", function () {
-    expect(fns.addPoints([1, 2], [2, 3], [-1, -2])).toEqual([2, 3]);
+    expect(fns.addPoints([1, 2], [2, 3], [-1, -2], [3, 5])).toEqual([5, 8]);
   });
 
   it("transforms a point in game space to a rectangle in screen space", function () {
